@@ -3,7 +3,7 @@ title: Caching
 layout: note
 parent: Core Concepts
 grand_parent: Hello Interview
-nav_order: 1
+nav_order: 3
 ---
 
 {: .intuition }
@@ -138,7 +138,7 @@ Without a CDN, a user in India hitting a Virginia origin pays **250–300 ms per
 > **When to introduce it:** the safest trigger is *"we serve static media at scale to a global audience."* Lead with that reason, then extend to API responses or edge logic only if the problem calls for it.
 
 {: .revisit }
-> **Cross-topic links.** **Dropbox** downloads are the CDN + signed-URL case. **API Design**: REST GETs are CDN-cacheable because the URL *is* the cache key. GraphQL gives up exactly this.
+> **Cross-topic links.** **Dropbox** downloads are the CDN + signed-URL case. [**API Design**](api-design.html): REST GETs are CDN-cacheable because the URL *is* the cache key. GraphQL gives up exactly this.
 
 ### 3.3 Client-side caching
 
@@ -777,4 +777,4 @@ Cache: every key is reconstructible, eviction is on, loss = misses. Store (rate 
 
 ---
 
-*Related patterns to cross-review: Scaling Reads (hot keys, read replicas) · Dealing with Contention (single-flight lock) · Real-time Updates (cache invalidation fan-out). Related notes: **API Design** · **Rate Limiter** · **Bitly** · **Dropbox***
+*Related patterns to cross-review: Scaling Reads (hot keys, read replicas) · Dealing with Contention (single-flight lock) · Real-time Updates (cache invalidation fan-out). Related notes: [**API Design**](api-design.html) · [**Data Modeling**](data-modeling.html) · **Rate Limiter** · **Bitly** · **Dropbox***

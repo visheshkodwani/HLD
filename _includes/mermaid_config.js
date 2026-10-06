@@ -29,8 +29,11 @@
     "noteBorderColor": "#fbbf24",
     "noteTextColor": "#fde68a",
     "activationBkgColor": "#2a1f17",
-    "activationBorderColor": "#fb923c"
+    "activationBorderColor": "#fb923c",
+    "attributeBackgroundColorOdd": "#221a14",
+    "attributeBackgroundColorEven": "#1a1410"
   },
   "flowchart": { "curve": "basis", "padding": 16, "nodeSpacing": 45, "rankSpacing": 55 },
+  "er": { "fontSize": 14 },
   "sequence": { "mirrorActors": false, "actorMargin": 70, "boxMargin": 12, "noteMargin": 12, "messageMargin": 42 }
 }

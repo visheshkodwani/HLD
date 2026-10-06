@@ -518,6 +518,9 @@ div.highlighter-rouge {
   &.language-javascript::after { content: "JavaScript"; }
   &.language-lua::after { content: "Lua"; }
   &.language-sql::after { content: "SQL"; }
+  &.language-json::after { content: "JSON"; }
+  &.language-graphql::after { content: "GraphQL"; }
+  &.language-protobuf::after { content: "Protobuf"; }
 
   > button {
     top: 0;
@@ -625,8 +628,8 @@ hr {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  width: 2.4rem;
-  padding: 0.3rem 0 0.15rem;
+  min-width: 2.4rem;
+  padding: 0.3rem 0.4rem 0.15rem;
   border-radius: 8px;
   background: $surface-2;
   border: 1px solid $border-color;
@@ -732,6 +735,11 @@ code.language-mermaid {
       rx: 10px;
       ry: 10px;
       filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5));
+    }
+
+    // ER "zero" markers default to white dots
+    marker circle {
+      fill: $surface !important;
     }
 
     rect.note,
