@@ -1,0 +1,27 @@
+---
+title: Home
+layout: default
+nav_order: 1
+has_toc: false
+---
+{%- assign topics = site.pages | where: "layout", "topic" | where_exp: "t", "t.parent == nil" | sort: "nav_order" -%}
+
+<section class="home-hero">
+  <p class="eyebrow">System design &middot; Revision notes</p>
+  <h1 class="home-title">HLD <span class="grad">Notes</span></h1>
+  <p class="hero-sub">{{ site.description }}</p>
+</section>
+
+<h2 class="section-title">Topics</h2>
+<div class="topic-grid">
+  {% for t in topics %}
+  {%- assign count = site.pages | where: "parent", t.title | size -%}
+  {%- assign unit = t.unit | default: "note" -%}
+  <a class="topic-card" href="{{ t.url | relative_url }}">
+    <span class="topic-icon">{% include topic_icon.html topic=t %}</span>
+    <span class="topic-name">{{ t.title }}</span>
+    {% if t.description %}<span class="topic-desc">{{ t.description }}</span>{% endif %}
+    <span class="topic-count">{{ count }} {{ unit }}{% if count != 1 %}s{% endif %} &rarr;</span>
+  </a>
+  {% endfor %}
+</div>

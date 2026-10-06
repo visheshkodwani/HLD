@@ -1,0 +1,28 @@
+---
+layout: default
+---
+{%- assign children = site.pages | where: "parent", page.title | sort: "nav_order" -%}
+{%- assign unit = page.unit | default: "note" -%}
+<header class="page-hero topic-hero">
+  <span class="topic-icon big">{% include topic_icon.html topic=page %}</span>
+  <div>
+    <h1 class="hero-heading">{{ page.title }}</h1>
+    {% if page.description %}<p class="hero-sub">{{ page.description }}</p>{% endif %}
+    <p class="eyebrow">{{ children | size }} {{ unit }}{% if children.size != 1 %}s{% endif %}</p>
+  </div>
+</header>
+
+{{ content }}
+
+{% if children.size > 0 %}
+<div class="problem-list">
+  {% for p in children %}
+  <a class="problem-row" href="{{ p.url | relative_url }}">
+    <span class="problem-num">{{ p.nav_order | default: forloop.index }}</span>
+    <span class="problem-name">{{ p.title }}</span>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<p class="empty">No {{ unit }}s here yet.</p>
+{% endif %}
