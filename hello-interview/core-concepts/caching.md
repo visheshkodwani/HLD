@@ -74,9 +74,9 @@ A standalone cache service the application talks to over the network.
 
 ```mermaid
 flowchart LR
-    C["Client"] --> A["App Servers"]
-    A -->|"check cache first"| R[("Redis")]
-    A -->|"on miss: read DB"| D[("Database")]
+    C["👤 Client"] --> A["🖥️ App Servers"]
+    A -->|"check cache first"| R[("⚡ Redis")]
+    A -->|"on miss: read DB"| D[("🗄️ Database")]
 ```
 
 - **Shared across all app servers.** There's one warm copy, and every instance sees an invalidation (unlike in-process).
@@ -117,9 +117,9 @@ A geographically distributed network of edge servers holding copies of your cont
 
 ```mermaid
 flowchart LR
-    U["User in India"] -->|"request"| E["Nearest CDN edge"]
+    U["👤 User in India"] -->|"request"| E["🌐 Nearest CDN edge"]
     E -->|"hit: 20–40 ms"| U
-    E -.->|"miss: fetch once"| O["Origin in Virginia"]
+    E -.->|"miss: fetch once"| O["🏢 Origin in Virginia"]
     O -.->|"store at edge"| E
 ```
 
@@ -146,11 +146,11 @@ Data stored at the requester to avoid the network entirely.
 
 ```mermaid
 flowchart LR
-    subgraph Device["Client device"]
-        UI["App or Browser"] --> L["Local cache"]
+    subgraph Device["📱 Client device"]
+        UI["App or Browser"] --> L["💾 Local cache"]
     end
-    L -->|"miss"| A["App Servers"]
-    A --> D[("Database")]
+    L -->|"miss"| A["🖥️ App Servers"]
+    A --> D[("🗄️ Database")]
 ```
 
 - **User-facing:** browser HTTP cache, `localStorage` / IndexedDB, mobile on-device storage. Strava keeps your run on the phone while offline and syncs later. A browser reusing a downloaded image from disk is also client caching.
@@ -166,15 +166,15 @@ App servers have plenty of RAM. Cache small, hot data **inside the application p
 
 ```mermaid
 flowchart LR
-    subgraph S1["App server 1"]
-        H1["Handler"] --> L1["Local cache"]
+    subgraph S1["🖥️ App server 1"]
+        H1["Handler"] --> L1["💾 Local cache"]
     end
-    subgraph S2["App server 2"]
-        H2["Handler"] --> L2["Local cache"]
+    subgraph S2["🖥️ App server 2"]
+        H2["Handler"] --> L2["💾 Local cache"]
     end
-    LB["Load balancer"] --> H1
+    LB["⚖️ Load balancer"] --> H1
     LB --> H2
-    L1 -->|"miss"| D[("Database")]
+    L1 -->|"miss"| D[("🗄️ Database")]
     L2 -->|"miss"| D
 ```
 
@@ -221,9 +221,9 @@ Two questions decide the pattern. **Who talks to the database**: the app or the 
 
 ```mermaid
 sequenceDiagram
-    participant A as App Server
-    participant C as Redis
-    participant D as Postgres
+    participant A as 🖥️ App Server
+    participant C as ⚡ Redis
+    participant D as 🐘 Postgres
     A->>C: GET user:123:profile
     alt hit
         C-->>A: profile
@@ -265,8 +265,8 @@ The app writes **only to the cache**; the cache **synchronously** writes the DB 
 
 ```mermaid
 flowchart LR
-    A["App Servers"] -->|"write"| C[("Cache")]
-    C -->|"sync write, then ack"| D[("Database")]
+    A["🖥️ App Servers"] -->|"write"| C[("⚡ Cache")]
+    C -->|"sync write, then ack"| D[("🗄️ Database")]
 ```
 
 **Needs a cache that supports it:** a caching library with a data-store plugin (Hazelcast MapStore, Ehcache loader-writer) or a managed layer like DynamoDB DAX. **Redis does not do this natively**; with Redis it's just application code.
@@ -284,9 +284,9 @@ The app writes **only to the cache** and gets an immediate ack; the cache **batc
 
 ```mermaid
 flowchart LR
-    A["App Servers"] -->|"write, ack immediately"| C[("Cache")]
+    A["🖥️ App Servers"] -->|"write, ack immediately"| C[("⚡ Cache")]
     A -->|"read"| C
-    C -.->|"async batched flush"| D[("Database")]
+    C -.->|"async batched flush"| D[("🗄️ Database")]
 ```
 
 - ✅ **Fastest writes**, and batching coalesces work: 100 increments → one DB write.
@@ -308,8 +308,8 @@ The cache is a **smart proxy**. The app never talks to the DB directly; on a mis
 
 ```mermaid
 flowchart LR
-    A["App Servers"] -->|"get"| C[("Cache")]
-    C -->|"on miss: cache loads"| D[("Database")]
+    A["🖥️ App Servers"] -->|"get"| C[("⚡ Cache")]
+    C -->|"on miss: cache loads"| D[("🗄️ Database")]
 ```
 
 Read-through is the read-side twin of write-through: in both, the cache is the intermediary that handles DB operations. Systems often combine them.
@@ -384,12 +384,12 @@ A popular key expires. For a brief window (even under a second), **every** reque
 
 ```mermaid
 flowchart LR
-    C1["Client"] --> A["App Server"]
-    C2["Client"] --> A
-    C3["Client"] --> A
-    C4["Client x1000"] --> A
-    A -->|"miss"| R[("Cache: key just expired")]
-    A ==>|"1000 identical queries"| D[("Database: overwhelmed")]
+    C1["👤 Client"] --> A["🖥️ App Server"]
+    C2["👤 Client"] --> A
+    C3["👤 Client"] --> A
+    C4["👥 Client x1000"] --> A
+    A -->|"miss"| R[("⌛ Cache: key just expired")]
+    A ==>|"1000 identical queries"| D[("🔥 Database: overwhelmed")]
 ```
 
 | Fix | How it works | Notes |
@@ -402,10 +402,10 @@ flowchart LR
 
 ```mermaid
 sequenceDiagram
-    participant R1 as Request 1
-    participant RN as Requests 2..N
-    participant C as Redis
-    participant D as Database
+    participant R1 as 📨 Request 1
+    participant RN as 📨 Requests 2..N
+    participant C as ⚡ Redis
+    participant D as 🗄️ Database
     R1->>C: GET feed (miss)
     RN->>C: GET feed (miss)
     R1->>C: SET lock:feed NX PX 5000 (won)
@@ -445,10 +445,10 @@ Reads go to the cache and writes go to the DB, so there's always a window where 
 
 ```mermaid
 sequenceDiagram
-    participant R as Reader
-    participant W as Writer
-    participant C as Cache
-    participant D as Database
+    participant R as 📖 Reader
+    participant W as ✍️ Writer
+    participant C as ⚡ Cache
+    participant D as 🗄️ Database
     R->>C: GET user:1 (miss)
     R->>D: SELECT user 1
     D-->>R: v1
@@ -482,9 +482,9 @@ One key receives a disproportionate share of traffic. Even at a 99% hit rate, ev
 
 ```mermaid
 flowchart LR
-    A["App servers with 2 s local L1"] -->|"random suffix"| S1[("Shard 1: user:taylorswift:r1")]
-    A --> S2[("Shard 2: user:taylorswift:r2")]
-    A --> S3[("Shard 3: user:taylorswift:r3")]
+    A["🖥️ App servers with 2 s local L1"] -->|"random suffix"| S1[("⚡ Shard 1: user:taylorswift:r1")]
+    A --> S2[("⚡ Shard 2: user:taylorswift:r2")]
+    A --> S3[("⚡ Shard 3: user:taylorswift:r3")]
 ```
 
 | Fix | How | Trade-off |
@@ -598,12 +598,12 @@ Pick the one or two that matter for **this** system:
 
 ```mermaid
 flowchart LR
-    U["Client"] --> CDN["CDN: images, seat-map assets, JS"]
-    U --> GW["API Gateway"]
-    GW --> ES["Event Service + L1 cache, 2 s TTL"]
-    ES -->|"cache-aside"| R[("Redis: event details")]
-    ES -->|"on miss"| PG[("Postgres")]
-    GW --> BS["Booking Service"]
+    U["👤 Client"] --> CDN["🌐 CDN: images, seat-map assets, JS"]
+    U --> GW["🚪 API Gateway"]
+    GW --> ES["🎫 Event Service + L1 cache, 2 s TTL"]
+    ES -->|"cache-aside"| R[("⚡ Redis: event details")]
+    ES -->|"on miss"| PG[("🐘 Postgres")]
+    GW --> BS["💳 Booking Service"]
     BS -->|"no cache, transactional"| PG
 ```
 

@@ -3,7 +3,7 @@ description: My system design revision notes. Core concepts, patterns and worked
 remote_theme: just-the-docs/just-the-docs
 plugins:
   - jekyll-remote-theme
-color_scheme: vibrant
+color_scheme: ember
 search_enabled: true
 back_to_top: true
 back_to_top_text: "Back to top"

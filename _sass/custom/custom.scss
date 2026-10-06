@@ -1,17 +1,18 @@
 // ---------------------------------------------------------------
-// Striver 450 — custom look on top of Just the Docs
+// HLD Notes — "Ember" look on top of Just the Docs
 // ---------------------------------------------------------------
 
-$pink: #ff6ec7;
-$violet: #8b5cf6;
-$cyan: #22d3ee;
-$green: #34d399;
 $amber: #fbbf24;
+$orange: #fb923c;
+$rose: #f43f5e;
+$teal: #2dd4bf;
+$sky: #7dd3fc;
+$green: #34d399;
 $red: #f87171;
-$surface: #121735;
-$surface-2: #181e44;
-$muted: #8a91c2;
-$grad: linear-gradient(120deg, $pink 0%, $violet 50%, $cyan 100%);
+$surface: #19130f;
+$surface-2: #221a14;
+$muted: #a08f80;
+$grad: linear-gradient(120deg, $amber 0%, $orange 50%, $rose 100%);
 $display-font: "Space Grotesk", "Inter", system-ui, sans-serif;
 
 @mixin gradient-text {
@@ -24,21 +25,21 @@ $display-font: "Space Grotesk", "Inter", system-ui, sans-serif;
 // ---------- page background ----------
 body {
   background:
-    radial-gradient(900px 500px at 85% -10%, rgba($violet, 0.18), transparent 70%),
-    radial-gradient(700px 400px at 10% 110%, rgba($pink, 0.08), transparent 70%),
+    radial-gradient(900px 500px at 85% -10%, rgba($orange, 0.14), transparent 70%),
+    radial-gradient(700px 400px at 10% 110%, rgba($rose, 0.07), transparent 70%),
     $body-background-color;
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: rgba($violet, 0.45);
+  background: rgba($orange, 0.4);
   color: #fff;
 }
 
 // ---------- sidebar ----------
 .side-bar {
-  background: linear-gradient(180deg, #0f1430 0%, $sidebar-color 100%);
+  background: linear-gradient(180deg, #16110d 0%, $sidebar-color 100%);
 }
 
 .site-title {
@@ -63,12 +64,12 @@ body {
   height: 2.1rem;
   border-radius: 10px;
   background: $grad;
-  color: #fff;
+  color: #1a0f08;
   font-family: $mono-font-family;
   font-weight: 700;
   font-size: 0.85rem;
   letter-spacing: -0.05em;
-  box-shadow: 0 6px 20px rgba($violet, 0.45);
+  box-shadow: 0 6px 20px rgba($orange, 0.4);
 }
 
 .brand-text {
@@ -92,15 +93,15 @@ body {
 
   &:hover {
     background-image: none;
-    background-color: rgba($violet, 0.12);
+    background-color: rgba($orange, 0.1);
     color: #fff;
   }
 
   &.active {
     background-image: none;
-    background-color: rgba($violet, 0.2);
+    background-color: rgba($orange, 0.16);
     color: #fff;
-    box-shadow: inset 3px 0 0 $pink;
+    box-shadow: inset 3px 0 0 $amber;
   }
 }
 
@@ -114,7 +115,28 @@ body {
 
   &:hover {
     background-image: none;
-    background-color: rgba($violet, 0.12);
+    background-color: rgba($orange, 0.1);
+  }
+}
+
+// section links injected under the current note (see _layouts/note.html)
+.nav-list.page-sections {
+  display: block !important;
+  margin: 0.15rem 0 0.4rem 0.9rem;
+  padding-left: 0.3rem;
+  border-left: 1px solid $border-color;
+
+  .nav-list-item .nav-list-link {
+    min-height: auto;
+    padding: 0.2rem 0.5rem !important;
+    font-size: 0.78rem !important;
+    line-height: 1.4;
+    color: $muted;
+
+    &.current {
+      color: $amber;
+      background-color: rgba($amber, 0.08);
+    }
   }
 }
 
@@ -123,7 +145,7 @@ body {
 }
 
 .nav-footer a {
-  color: $pink;
+  color: $orange;
 }
 
 // ---------- top bar ----------
@@ -161,6 +183,7 @@ body {
     display: flex;
     align-items: center;
     gap: 0.6rem;
+    scroll-margin-top: 1rem;
 
     &::before {
       content: "";
@@ -172,12 +195,12 @@ body {
     }
   }
 
-  a:not(.btn):not(.topic-card):not(.problem-row):not(.chip) {
-    text-decoration-color: rgba($pink, 0.4);
+  a:not(.btn):not(.topic-card):not(.problem-row) {
+    text-decoration-color: rgba($orange, 0.4);
     text-underline-offset: 3px;
 
     &:hover {
-      text-decoration-color: $pink;
+      text-decoration-color: $orange;
     }
   }
 
@@ -229,88 +252,6 @@ body {
   }
 }
 
-.progress-card {
-  margin-top: 2rem;
-  padding: 1.4rem 1.5rem;
-  background: linear-gradient(180deg, rgba($surface-2, 0.9), rgba($surface, 0.9));
-  border: 1px solid $border-color;
-  border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-}
-
-.progress-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 0.7rem;
-}
-
-.progress-label {
-  font-family: $display-font;
-  font-weight: 600;
-  color: $body-heading-color;
-}
-
-.progress-count {
-  color: $muted;
-  font-size: 0.9rem;
-
-  b {
-    color: #fff;
-    font-size: 1.1rem;
-  }
-}
-
-.progress-track {
-  height: 10px;
-  border-radius: 99px;
-  background: rgba(255, 255, 255, 0.06);
-  overflow: hidden;
-}
-
-.progress-fill {
-  min-width: 10px;
-  height: 100%;
-  border-radius: 99px;
-  background: $grad;
-  box-shadow: 0 0 16px rgba($pink, 0.6);
-}
-
-.stat-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
-  margin-top: 1.2rem;
-}
-
-.stat {
-  padding: 0.7rem 0.8rem;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid $border-color;
-  display: flex;
-  flex-direction: column;
-}
-
-.stat-num {
-  font-family: $display-font;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.stat-label {
-  font-size: 0.75rem;
-  color: $muted;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.stat-easy .stat-num { color: $green; }
-.stat-medium .stat-num { color: $amber; }
-.stat-hard .stat-num { color: $red; }
-.stat-topics .stat-num { color: $cyan; }
-
 .section-title {
   margin-top: 3rem !important;
 }
@@ -335,8 +276,8 @@ body {
 
   &:hover {
     transform: translateY(-3px);
-    border-color: rgba($violet, 0.7);
-    box-shadow: 0 14px 40px rgba($violet, 0.25);
+    border-color: rgba($orange, 0.7);
+    box-shadow: 0 14px 40px rgba($orange, 0.18);
   }
 }
 
@@ -346,8 +287,8 @@ body {
   width: 2.6rem;
   height: 2.6rem;
   border-radius: 12px;
-  background: rgba($violet, 0.15);
-  border: 1px solid rgba($violet, 0.35);
+  background: rgba($orange, 0.12);
+  border: 1px solid rgba($orange, 0.32);
   font-size: 1.3rem;
   font-family: $display-font;
   font-weight: 700;
@@ -382,10 +323,10 @@ body {
   padding-top: 0.6rem;
   font-size: 0.82rem;
   font-weight: 600;
-  color: $pink;
+  color: $orange;
 }
 
-// ---------- topic + problem headers ----------
+// ---------- topic + note headers ----------
 .page-hero {
   padding: 1.5rem 0 1.25rem;
   margin-bottom: 1.5rem;
@@ -402,49 +343,7 @@ body {
   }
 }
 
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.9rem;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.22rem 0.7rem;
-  border-radius: 99px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  line-height: 1.5;
-  border: 1px solid transparent;
-  white-space: nowrap;
-
-  b {
-    font-weight: 500;
-    opacity: 0.75;
-  }
-}
-
-.chip-easy { color: $green; background: rgba($green, 0.12); border-color: rgba($green, 0.3); }
-.chip-medium { color: $amber; background: rgba($amber, 0.12); border-color: rgba($amber, 0.3); }
-.chip-hard { color: $red; background: rgba($red, 0.12); border-color: rgba($red, 0.3); }
-.chip-time { color: $cyan; background: rgba($cyan, 0.1); border-color: rgba($cyan, 0.25); font-family: $mono-font-family; }
-.chip-space { color: #c4b5fd; background: rgba($violet, 0.12); border-color: rgba($violet, 0.3); font-family: $mono-font-family; }
-
-.chip-link {
-  color: #fff !important;
-  background: $grad;
-  text-decoration: none !important;
-  box-shadow: 0 4px 14px rgba($pink, 0.35);
-
-  &:hover {
-    filter: brightness(1.1);
-  }
-}
-
-// ---------- problem list on topic pages ----------
+// ---------- note list on topic pages ----------
 .problem-list {
   display: flex;
   flex-direction: column;
@@ -454,7 +353,7 @@ body {
 
 .problem-row {
   display: grid;
-  grid-template-columns: 2.5rem 1fr auto;
+  grid-template-columns: 2.5rem 1fr;
   align-items: center;
   gap: 1rem;
   padding: 0.8rem 1rem;
@@ -466,14 +365,9 @@ body {
   transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
 
   &:hover {
-    border-color: rgba($violet, 0.7);
+    border-color: rgba($orange, 0.7);
     background: $surface-2;
     transform: translateX(3px);
-  }
-
-  .chips {
-    margin: 0;
-    justify-content: flex-end;
   }
 }
 
@@ -492,19 +386,6 @@ body {
 }
 
 @media (max-width: 40rem) {
-  .problem-row {
-    grid-template-columns: 2rem 1fr;
-
-    .chips {
-      grid-column: 2;
-      justify-content: flex-start;
-    }
-  }
-
-  .stat-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .topic-hero {
     align-items: flex-start;
   }
@@ -521,13 +402,13 @@ blockquote.revisit,
 blockquote.insight,
 blockquote.aside,
 blockquote.say {
-  --c: #{$violet};
+  --c: #{$orange};
   margin: 1.5rem 0;
   padding: 0.9rem 1.1rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-left: 3px solid var(--c);
   border-radius: 10px;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--c) 14%, transparent), color-mix(in srgb, var(--c) 4%, transparent));
+  background: linear-gradient(90deg, color-mix(in srgb, var(--c) 13%, transparent), color-mix(in srgb, var(--c) 3%, transparent));
   color: $body-text-color;
 
   &::before {
@@ -553,12 +434,12 @@ blockquote.say {
   }
 }
 
-blockquote.intuition { --c: #{$violet}; &::before { content: "💡 Intuition"; } }
-blockquote.pitfall { --c: #{$red}; &::before { content: "⚠️ Pitfall"; } }
+blockquote.intuition { --c: #{$amber}; &::before { content: "💡 Intuition"; } }
+blockquote.pitfall { --c: #{$rose}; &::before { content: "⚠️ Pitfall"; } }
 blockquote.revisit { --c: #{$green}; &::before { content: "🔁 Revisit"; } }
-blockquote.insight { --c: #{$cyan}; &::before { content: "🧠 Key idea"; } }
+blockquote.insight { --c: #{$teal}; &::before { content: "🧠 Key idea"; } }
 blockquote.aside { --c: #{$muted}; &::before { content: "📌 Note"; } }
-blockquote.say { --c: #{$amber}; &::before { content: "🗣️ Say it"; } }
+blockquote.say { --c: #{$sky}; &::before { content: "🗣️ Say it"; } }
 
 // ---------- collapsibles: contents, self-test Q&A ----------
 .main-content details {
@@ -587,9 +468,9 @@ blockquote.say { --c: #{$amber}; &::before { content: "🗣️ Say it"; } }
 :not(pre, figure) > code {
   padding: 0.15em 0.4em;
   font-size: 0.86em;
-  color: #ffb3dd;
-  background-color: rgba($pink, 0.08);
-  border: 1px solid rgba($pink, 0.18);
+  color: #fed7aa;
+  background-color: rgba($orange, 0.08);
+  border: 1px solid rgba($orange, 0.18);
   border-radius: 6px;
 }
 
@@ -599,7 +480,7 @@ div.highlighter-rouge {
   background: $code-background-color;
   border: 1px solid $border-color;
   border-radius: 14px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba($violet, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba($orange, 0.06);
   overflow: hidden;
 
   // window bar with three dots
@@ -615,7 +496,7 @@ div.highlighter-rouge {
       radial-gradient(circle at 1.1rem 50%, #ff5f57 0.32rem, transparent 0.34rem),
       radial-gradient(circle at 1.9rem 50%, #febc2e 0.32rem, transparent 0.34rem),
       radial-gradient(circle at 2.7rem 50%, #28c840 0.32rem, transparent 0.34rem),
-      #0f1330;
+      #15100c;
   }
 
   // language label in the bar
@@ -631,12 +512,12 @@ div.highlighter-rouge {
     color: $muted;
   }
 
-  &.language-cpp::after { content: "C++"; }
-  &.language-c::after { content: "C"; }
   &.language-java::after { content: "Java"; }
   &.language-python::after { content: "Python"; }
   &.language-js::after,
   &.language-javascript::after { content: "JavaScript"; }
+  &.language-lua::after { content: "Lua"; }
+  &.language-sql::after { content: "SQL"; }
 
   > button {
     top: 0;
@@ -670,22 +551,22 @@ div.highlighter-rouge {
   }
 }
 
-// Tokyo Night–style syntax colors
+// warm syntax colors
 .highlight {
-  color: #c0caf5;
+  color: #ecdccd;
 
-  .c, .c1, .cm, .ch, .cs { color: #6b75a8; font-style: italic; }
-  .cp, .cpf { color: #7dcfff; font-weight: normal; font-style: normal; }
-  .k, .kd, .kn, .kr, .kc { color: #bb9af7; }
-  .kt { color: #2ac3de; }
-  .o, .ow { color: #89ddff; font-weight: normal; }
-  .p { color: #a9b1d6; }
-  .n, .nv { color: #c0caf5; }
-  .nf, .fm { color: #7aa2f7; }
-  .nc, .nn, .nb, .bp { color: #e0af68; }
-  .na { color: #73daca; }
-  .s, .s1, .s2, .sc, .sb, .se { color: #9ece6a; }
-  .m, .mi, .mf, .mh, .il, .mo { color: #ff9e64; }
+  .c, .c1, .cm, .ch, .cs { color: #8b7b6e; font-style: italic; }
+  .cp, .cpf { color: $sky; font-weight: normal; font-style: normal; }
+  .k, .kd, .kn, .kr, .kc { color: $orange; }
+  .kt { color: $teal; }
+  .o, .ow { color: #fdba74; font-weight: normal; }
+  .p { color: #c9b8a8; }
+  .n, .nv { color: #ecdccd; }
+  .nf, .fm { color: $amber; }
+  .nc, .nn, .nb, .bp { color: #fcd34d; }
+  .na { color: #5eead4; }
+  .s, .s1, .s2, .sc, .sb, .se { color: #a3e635; }
+  .m, .mi, .mf, .mh, .il, .mo { color: #f9a8d4; }
 }
 
 // ---------- misc ----------
@@ -706,7 +587,7 @@ hr {
   border-radius: 12px;
 }
 
-// ---------- visualizations:  {% include array.html ... %}  and ```mermaid ----------
+// ---------- visualizations:  {% include array.html ... %} ----------
 .viz {
   margin: 1.25rem 0 1.5rem;
   padding: 1rem 1.1rem;
@@ -771,9 +652,9 @@ hr {
   }
 
   &.hl {
-    background: rgba($pink, 0.16);
-    border-color: $pink;
-    box-shadow: 0 0 12px rgba($pink, 0.35);
+    background: rgba($orange, 0.16);
+    border-color: $orange;
+    box-shadow: 0 0 12px rgba($orange, 0.35);
 
     b { color: #fff; }
   }
@@ -789,18 +670,74 @@ hr {
   font-size: 0.78rem;
   color: $muted;
 
-  .hl { color: $pink; }
+  .hl { color: $orange; }
   .done { color: $green; }
 }
 
-// mermaid diagrams: drop the code-window chrome
-div.highlighter-rouge.language-mermaid,
-.language-mermaid {
-  padding-top: 0;
-  text-align: center;
+// ---------- mermaid: dotted whiteboard card, rounded nodes, datastores in teal ----------
+// Colors come from _includes/mermaid_config.js; this adds what theme variables can't.
+.main-content pre:has(> code.language-mermaid) {
+  margin: 1.5rem 0 1.75rem;
+  padding: 1.5rem 1rem;
+  border: 1px solid $border-color;
+  border-radius: 16px;
+  background:
+    radial-gradient(circle, rgba($orange, 0.14) 1px, transparent 1.5px) 0 0 / 22px 22px,
+    radial-gradient(600px 240px at 50% 0%, rgba($orange, 0.08), transparent 70%),
+    $surface;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4);
+  overflow-x: auto;
+}
 
-  &::before,
-  &::after {
-    display: none;
+code.language-mermaid {
+  display: block;
+  padding: 0;
+  text-align: center;
+  background: none;
+  border: 0;
+
+  svg {
+    // services: rounded cards with depth
+    .node rect.label-container {
+      rx: 10px;
+      ry: 10px;
+    }
+
+    .node .label-container {
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5));
+    }
+
+    // cylinders [(...)] are datastores: Redis, Postgres, caches
+    .node path.label-container {
+      fill: #0f2523 !important;
+      stroke: $teal !important;
+    }
+
+    .cluster rect {
+      rx: 14px;
+      ry: 14px;
+      stroke-dasharray: 6 4;
+    }
+
+    .flowchart-link {
+      stroke-width: 1.6px;
+    }
+
+    .labelBkg,
+    .edgeLabel {
+      border-radius: 6px;
+    }
+
+    rect.actor {
+      rx: 10px;
+      ry: 10px;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5));
+    }
+
+    rect.note,
+    .labelBox {
+      rx: 8px;
+      ry: 8px;
+    }
   }
 }
