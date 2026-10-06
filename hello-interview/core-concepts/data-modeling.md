@@ -236,7 +236,7 @@ flowchart LR
 
 ## 7. Sharding and the Partition Key
 
-When one machine can no longer hold the data (or absorb the writes), you split rows across nodes by a **shard key**.
+When one machine can no longer hold the data (or absorb the writes), you split rows across nodes by a **shard key**. Full deep dive: [**Sharding**](sharding.html).
 
 **Shard by your dominant access pattern.** If reads are overwhelmingly "everything for user X," shard by `user_id` — that keeps a user's rows co-located and turns the common query into a single-shard hit.
 
@@ -495,4 +495,4 @@ DB type → columns per entity → PKs and FKs → indexes tied to endpoints →
 
 ---
 
-*Related pages to cross-review: [API Design](api-design.html) (endpoints → queries · idempotency keys) · [Caching](caching.html) (denormalized shape in a cache) · **Rate Limiter** (contention primitives) · **Bitly** (unique constraint as reservation) · **Dropbox** (metadata modeling for large blobs)*
+*Related pages to cross-review: [API Design](api-design.html) (endpoints → queries · idempotency keys) · [Caching](caching.html) (denormalized shape in a cache) · [Sharding](sharding.html) (shard key, hot spots, cross-shard queries) · **Rate Limiter** (contention primitives) · **Bitly** (unique constraint as reservation) · **Dropbox** (metadata modeling for large blobs)*
