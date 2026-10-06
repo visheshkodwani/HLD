@@ -554,8 +554,9 @@ div.highlighter-rouge {
   }
 }
 
-// warm syntax colors
-.highlight {
+// warm syntax colors (pre.highlight too: the theme gives plain blocks its dim line-number color)
+.highlight,
+pre.highlight {
   color: #ecdccd;
 
   .c, .c1, .cm, .ch, .cs { color: #8b7b6e; font-style: italic; }
