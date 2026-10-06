@@ -11,6 +11,7 @@ layout: default
 {%- comment -%}
 List this note's ## sections under it in the sidebar and highlight the one being read.
 The theme drops the href from the current page's link, so match either way.
+The added .nav-list-expander is toggled by the theme's own click handler (it flips li.active).
 No // comments inside the script: the theme minifies HTML onto one line.
 {%- endcomment -%}
 <script>
@@ -33,7 +34,12 @@ No // comments inside the script: the theme minifies HTML onto one line.
       list.append(li);
       return a;
     });
-    link.parentElement.append(list);
+    const li = link.parentElement;
+    li.classList.add("active");
+    li.insertAdjacentHTML("afterbegin",
+      '<button class="nav-list-expander btn-reset" aria-label="' + link.textContent.trim() + ' sections" aria-expanded="true">' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#svg-arrow-right"></use></svg></button>');
+    li.append(list);
 
     const spy = () => {
       const i = heads.findLastIndex(h => h.getBoundingClientRect().top < 120);
