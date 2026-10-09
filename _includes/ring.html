@@ -1,0 +1,14 @@
+{%- comment -%}
+Hash ring on a 0–100 space, positions clockwise from the top.
+  {% include ring.html nodes="0:DB1,25:DB2:dead,90:DB5:new" arc="75-90" keys="12,61" note="..." %}
+  nodes: pos:label[:new|dead], colored by the label's last digit · arc: highlighted ranges "from-to", comma-separated, may wrap past 0 ("90-10") · keys: positions where keys hashed.
+{%- endcomment -%}
+{%- assign arcs = include.arc | split: "," -%}
+{%- assign keys = include.keys | split: "," -%}
+{%- assign nodes = include.nodes | split: "," -%}
+<div class="ring-wrap"><div class="ring">
+{%- for r in arcs -%}{%- assign ab = r | split: "-" -%}{%- assign span = ab[1] | minus: ab[0] | plus: 100 | modulo: 100 -%}<span class="ring-arc" style="--from:{{ ab[0] | times: 3.6 }}deg;--span:{{ span | times: 3.6 }}deg"></span>{%- endfor -%}
+{%- for t in (0..19) -%}<span class="ring-tick" style="--a:{{ t | times: 18 }}deg">{{ t | times: 5 }}</span>{%- endfor -%}
+{%- for k in keys -%}<span class="ring-key" style="--a:{{ k | times: 3.6 }}deg">{{ k }}</span>{%- endfor -%}
+{%- for n in nodes -%}{%- assign p = n | split: ":" -%}<span class="ring-node c{{ p[1] | slice: -1 }} {{ p[2] }}" style="--a:{{ p[0] | times: 3.6 }}deg">{{ p[1] }}</span>{%- endfor -%}
+</div>{% if include.note %}<p class="ring-note">{{ include.note }}</p>{% endif %}</div>

@@ -164,7 +164,7 @@ User 123 → hash(123) % 4 = Shard 1
 In general, going from N to N+1 shards with modulo moves about **N/(N+1)** of all data. From 4 to 5, that's ~80%.
 
 {: .insight }
-> **The fix is consistent hashing.** Keys and shards both sit on a hash ring, and a key belongs to the next shard clockwise. Adding a shard only steals keys from its neighbour, so roughly **1/(N+1)** of the data moves instead of nearly all of it. Hash sharding is great *as long as you have a resharding plan*. Say "consistent hashing" in the same breath as "hash on `user_id`".
+> **The fix is [consistent hashing](consistent-hashing.html).** Keys and shards both sit on a hash ring, and a key belongs to the next shard clockwise. Adding a shard only steals keys from its neighbour, so roughly **1/(N+1)** of the data moves instead of nearly all of it. Hash sharding is great *as long as you have a resharding plan*. Say "consistent hashing" in the same breath as "hash on `user_id`".
 
 {: .aside }
 > This is the strategy your interviewer will **assume** unless you say otherwise. You don't need to defend picking it. You need to defend *deviating* from it.
@@ -489,4 +489,4 @@ Identify the bottleneck (storage, write or read throughput), explain with number
 
 ---
 
-*Related patterns to cross-review: Dealing with Contention (keep the atomic boundary on one shard) · Multi-step Processes (sagas, 2PC) · Scaling Reads (replicas before shards) · Scaling Writes (when the primary saturates). Related notes: [**Data Modeling**](data-modeling.html) (shard key = dominant access pattern) · [**Caching**](caching.html) (hot keys, caching cross-shard results) · [**API Design**](api-design.html) · **Consistent Hashing** · **Numbers to Know***
+*Related patterns to cross-review: Dealing with Contention (keep the atomic boundary on one shard) · Multi-step Processes (sagas, 2PC) · Scaling Reads (replicas before shards) · Scaling Writes (when the primary saturates). Related notes: [**Data Modeling**](data-modeling.html) (shard key = dominant access pattern) · [**Caching**](caching.html) (hot keys, caching cross-shard results) · [**API Design**](api-design.html) · [**Consistent Hashing**](consistent-hashing.html) (ring, vnodes, resharding) · **Numbers to Know***

@@ -265,7 +265,7 @@ flowchart LR
 - **The shard key is effectively permanent.** Changing it means rewriting everything. Treat it as a one-way door and say so.
 
 {: .revisit }
-> **Links to Consistent Hashing.** Once you've picked *what* to shard on, consistent hashing is *how* you map keys to nodes so adding a node moves ~1/N of the data instead of remapping everything. Two separate decisions — candidates routinely blur them. Shard key = which rows travel together. Hashing scheme = where they land.
+> **Links to [Consistent Hashing](consistent-hashing.html).** Once you've picked *what* to shard on, consistent hashing is *how* you map keys to nodes so adding a node moves ~1/N of the data instead of remapping everything. Two separate decisions — candidates routinely blur them. Shard key = which rows travel together. Hashing scheme = where they land.
 
 ---
 
