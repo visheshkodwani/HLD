@@ -75,7 +75,7 @@ Everything downstream — keys, indexes, denormalization, sharding — is a tool
 |---|---|---|
 | **Data volume** | Can this live on one machine? | Whether you shard, and whether entities must be split across stores |
 | **Access patterns** ⭐ | **What queries must be fast?** | **Indexes, denormalization, shard key — most of your decisions** |
-| **Consistency needs** | What must be exactly right, right now? | What stays in one ACID transaction vs. what can go eventual |
+| **Consistency needs** | What must be exactly right, right now? | What stays in one ACID transaction vs. what can go eventual ([CAP Theorem](cap-theorem.html)) |
 
 **Access patterns dominate, and they come free from your API.** You already listed the endpoints. Each one is a query. That list *is* your access-pattern list — don't invent a second one.
 

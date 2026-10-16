@@ -436,7 +436,7 @@ Reads go to the cache and writes go to the DB, so there's always a window where 
 |---|---|---|---|
 | **Invalidate on write** ✅ | **≈ms: next read reloads** | **Every write path must remember to DEL** | **User-facing entities: profiles, settings** |
 | Short TTL only | Up to the TTL | No write-path work; more misses | Data where seconds or minutes of staleness is invisible |
-| Accept eventual consistency | Bounded by TTL / refresh interval | Cheapest | Feeds, counts, metrics, trending |
+| Accept [eventual consistency](cap-theorem.html#71-the-consistency-spectrum) | Bounded by TTL / refresh interval | Cheapest | Feeds, counts, metrics, trending |
 | CDC-driven invalidation | ≈ replication lag | Infra: tail the DB log (Debezium on the WAL) → invalidator | Many services write the same data; you can't trust every path to DEL |
 | Don't cache it | Zero | Full DB load | Seat inventory, balances, anything you transact on |
 

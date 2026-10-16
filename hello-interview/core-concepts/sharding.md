@@ -284,7 +284,7 @@ On one database, "deduct inventory and create the order" is one ACID transaction
 
 1. **Design so it never happens** ✅. Shard by `user_id` and keep *everything* about a user on their shard: balance, transaction history, profile. Every transaction is then single-shard, which is fast and reliable.
 2. **Saga for the unavoidable cases.** Break the operation into local steps, each with a **compensating action**. If step N fails, run the compensations for steps N-1 back to 1.
-3. **Accept eventual consistency** where it's fine. A follower count denormalized across shards can disagree for a few seconds and converge.
+3. **Accept eventual consistency** where it's fine ([CAP Theorem §4](cap-theorem.html#4-choosing-c-or-a)). A follower count denormalized across shards can disagree for a few seconds and converge.
 
 ```mermaid
 sequenceDiagram
