@@ -441,4 +441,4 @@ No. Partitions are just very rare on Google's network. When one happens, Spanner
 
 ---
 
-*Related patterns to cross-review: Dealing with Contention (booking a seat exactly once) · Scaling Reads (replicas and replication lag) · Multi-step Processes (2PC, sagas). Related notes: [**Sharding**](sharding.html) (consistency across shards) · [**Caching**](caching.html) (a cache is an availability choice) · [**Consistent Hashing**](consistent-hashing.html) (replicas on the ring) · [**Data Modeling**](data-modeling.html) (what stays transactional) · **Ticketmaster** · **Tinder***
+*Related patterns to cross-review: Dealing with Contention (booking a seat exactly once) · [**Scaling Reads**](../common-patterns/scaling-reads.html) (replicas and replication lag) · Multi-step Processes (2PC, sagas). Related notes: [**Sharding**](sharding.html) (consistency across shards) · [**Caching**](caching.html) (a cache is an availability choice) · [**Consistent Hashing**](consistent-hashing.html) (replicas on the ring) · [**Data Modeling**](data-modeling.html) (what stays transactional) · **Ticketmaster** · **Tinder***

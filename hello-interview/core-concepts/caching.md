@@ -497,7 +497,7 @@ flowchart LR
 **Detection:** `redis-cli --hotkeys` (requires an LFU eviction policy), client-side key sampling, CPU skew across shards.
 
 {: .revisit }
-> **Pattern: Scaling Reads.** Hot keys aren't a cache-only problem. Sharding assumes keys are roughly uniform in load. Viral content breaks that assumption everywhere: caches, DB partitions, message-queue partitions.
+> **Pattern: [Scaling Reads](../common-patterns/scaling-reads.html).** Hot keys aren't a cache-only problem. Sharding assumes keys are roughly uniform in load. Viral content breaks that assumption everywhere: caches, DB partitions, message-queue partitions.
 
 ### 6.4 The cache goes down
 
@@ -777,4 +777,4 @@ Cache: every key is reconstructible, eviction is on, loss = misses. Store (rate 
 
 ---
 
-*Related patterns to cross-review: Scaling Reads (hot keys, read replicas) · Dealing with Contention (single-flight lock) · Real-time Updates (cache invalidation fan-out). Related notes: [**API Design**](api-design.html) · [**Data Modeling**](data-modeling.html) · **Rate Limiter** · **Bitly** · **Dropbox***
+*Related patterns to cross-review: [**Scaling Reads**](../common-patterns/scaling-reads.html) (hot keys, read replicas) · Dealing with Contention (single-flight lock) · Real-time Updates (cache invalidation fan-out). Related notes: [**API Design**](api-design.html) · [**Data Modeling**](data-modeling.html) · **Rate Limiter** · **Bitly** · **Dropbox***

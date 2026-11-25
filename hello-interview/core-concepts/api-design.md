@@ -676,4 +676,4 @@ Protobuf binary encoding (no field names on the wire, cheap serialization) and H
 
 ---
 
-*Related patterns to cross-review: Dealing with Contention (idempotency keys) · Scaling Reads (pagination + caching) · Real-time Updates (WebSocket/SSE where REST doesn't fit). Related notes: [**Data Modeling**](data-modeling.html) · [**Caching**](caching.html) · **Rate Limiter** · **Bitly***
+*Related patterns to cross-review: Dealing with Contention (idempotency keys) · [**Scaling Reads**](../common-patterns/scaling-reads.html) (pagination + caching) · Real-time Updates (WebSocket/SSE where REST doesn't fit). Related notes: [**Data Modeling**](data-modeling.html) · [**Caching**](caching.html) · **Rate Limiter** · **Bitly***

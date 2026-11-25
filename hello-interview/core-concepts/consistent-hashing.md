@@ -399,4 +399,4 @@ Infrastructure questions: design a distributed cache, KV store/database or messa
 
 ---
 
-*Related patterns to cross-review: Scaling Reads (hot keys, replicas) · Scaling Writes (adding capacity without a full reshuffle). Related notes: [**Sharding**](sharding.html) (hash strategy, resharding, celebrity shard) · [**Caching**](caching.html) (hot keys, stampede on resize) · [**Data Modeling**](data-modeling.html) (shard key vs hashing scheme) · **Numbers to Know***
+*Related patterns to cross-review: [**Scaling Reads**](../common-patterns/scaling-reads.html) (hot keys, replicas) · Scaling Writes (adding capacity without a full reshuffle). Related notes: [**Sharding**](sharding.html) (hash strategy, resharding, celebrity shard) · [**Caching**](caching.html) (hot keys, stampede on resize) · [**Data Modeling**](data-modeling.html) (shard key vs hashing scheme) · **Numbers to Know***
